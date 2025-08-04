@@ -57,3 +57,10 @@ RUN curl -L -o vacuum.tar.gz https://github.com/daveshanley/vacuum/releases/down
 # to the new image.
 ARG OAPI_CODEGEN_COMMIT_HASH="702cc9178842ef30e8ea8b1ec3aeb9637fa3895f"
 RUN GOBIN=/usr/local/bin go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@${OAPI_CODEGEN_COMMIT_HASH}
+
+# https://github.com/uber-go/mock/releases
+# https://github.com/uber-go/mock/commits/main/
+# They don't release binaries
+# v0.5.2
+ARG GOMOCK_COMMIT_HASH="0b8095f698fe3b6414a8d1321e990100ba8ce5bc"
+RUN GOBIN=/usr/local/bin go install go.uber.org/mock/mockgen@${GOMOCK_COMMIT_HASH}

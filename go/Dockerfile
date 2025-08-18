@@ -1,4 +1,4 @@
-FROM golang:1.24-alpine
+FROM golang:1.25-alpine
 
 RUN apk update && apk upgrade
 RUN apk add curl git gcc musl-dev
@@ -17,8 +17,8 @@ RUN curl -L -o task_linux_amd64.tar.gz https://github.com/go-task/task/releases/
 
 
 # https://github.com/golangci/golangci-lint/releases
-ARG GOLANG_CI_VERSION=2.3.0
-ARG GOLANG_CI_SHASUM="b15f994fe7b9885e3862d394e159025fc2ca808d0dccf2ce3d6a242896c2be0c  golangci-lint.tar.gz"
+ARG GOLANG_CI_VERSION=2.4.0
+ARG GOLANG_CI_SHASUM="fae792524c04424c0ac369f5b8076f04b45cf29fc945a370e55d369a8dc11840  golangci-lint.tar.gz"
 RUN curl -L -o golangci-lint.tar.gz https://github.com/golangci/golangci-lint/releases/download/v${GOLANG_CI_VERSION}/golangci-lint-${GOLANG_CI_VERSION}-linux-amd64.tar.gz && \
     tar xvzf golangci-lint.tar.gz --strip-components=1 && \
     echo "$GOLANG_CI_SHASUM" | sha256sum -c - && \
@@ -39,8 +39,8 @@ RUN curl -L -o gotestsum.tar.gz https://github.com/gotestyourself/gotestsum/rele
 # https://github.com/daveshanley/vacuum/releases
 # Needs to also be updated in api/Taskfile.yml once the CI gets updated
 # to the new image.
-ARG VACUUM_VERSION=0.17.6
-ARG VACUUM_SHASUM="9c0e3fed6841abaf1a9bd4ec146ba7a8e03221806598839a4ad75a81d9a346c9  vacuum.tar.gz"
+ARG VACUUM_VERSION=0.17.8
+ARG VACUUM_SHASUM="96415f3bd5d9380846a5ee8821538e45ee45addbcf0ec734c24d3b9a4daf5ed1  vacuum.tar.gz"
 RUN curl -L -o vacuum.tar.gz https://github.com/daveshanley/vacuum/releases/download/v${VACUUM_VERSION}/vacuum_${VACUUM_VERSION}_linux_x86_64.tar.gz && \
     tar xvzf vacuum.tar.gz && \
     echo "$VACUUM_SHASUM" | sha256sum -c - && \

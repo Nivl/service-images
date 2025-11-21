@@ -29,7 +29,7 @@ jobs:
     outputs:
       go-dev: ${{ steps.changes.outputs.go-dev }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: git config --global --add safe.directory /__w/service-images/service-images
 
       - name: Check for file changes
@@ -52,7 +52,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Log in to the Container registry
         uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # 3.5.0 https://github.com/docker/login-action/releases

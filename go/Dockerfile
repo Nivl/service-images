@@ -23,7 +23,7 @@ RUN tar xvzf golangci-lint.tar.gz --strip-components=1 && \
     rm golangci-lint.tar.gz
 
 # https://github.com/gotestyourself/gotestsum/releases
-ARG GOTESTSUM_VERSION=1.13
+ARG GOTESTSUM_VERSION=1.13.0
 ARG GOTESTSUM_SHASUM="sha256:11ccddeaf708ef228889f9fe2f68291a75b27013ddfc3b18156e094f5f40e8ee"
 ADD --checksum=${GOTESTSUM_SHASUM} https://github.com/gotestyourself/gotestsum/releases/download/v${GOTESTSUM_VERSION}/gotestsum_${GOTESTSUM_VERSION}_linux_amd64.tar.gz gotestsum.tar.gz
 RUN tar xvzf gotestsum.tar.gz && \

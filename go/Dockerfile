@@ -7,25 +7,25 @@ RUN apk update && apk upgrade && \
     apk add --no-cache tar
 
 # https://github.com/go-task/task/releases
-ARG TASK_VERSION=3.44.1
-ARG TASK_SHASUM="62969d22bee5ea8950cc64a30cc7eb278f89ad67683132e728841457aae523c1"
-ADD --checksum=sha256:${TASK_SHASUM} https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz task_linux_amd64.tar.gz
+ARG TASK_VERSION=3.46.4
+ARG TASK_SHASUM="sha256:4b0098862292de03d568c851b207bce5fdb8a59cb533d6ed4132386151926c46"
+ADD --checksum=${TASK_SHASUM} https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz task_linux_amd64.tar.gz
 RUN tar xvzf task_linux_amd64.tar.gz && \
     mv task /usr/local/bin/task && \
     rm task_linux_amd64.tar.gz
 
 # https://github.com/golangci/golangci-lint/releases
-ARG GOLANG_CI_VERSION=2.4.0
-ARG GOLANG_CI_SHASUM="fae792524c04424c0ac369f5b8076f04b45cf29fc945a370e55d369a8dc11840"
-ADD --checksum=sha256:${GOLANG_CI_SHASUM} https://github.com/golangci/golangci-lint/releases/download/v${GOLANG_CI_VERSION}/golangci-lint-${GOLANG_CI_VERSION}-linux-amd64.tar.gz golangci-lint.tar.gz
+ARG GOLANG_CI_VERSION=2.8.0
+ARG GOLANG_CI_SHASUM="sha256:7048bc6b25c9515ed092c83f9fa8709ca97937ead52d9ff317a143299ee97a50"
+ADD --checksum=${GOLANG_CI_SHASUM} https://github.com/golangci/golangci-lint/releases/download/v${GOLANG_CI_VERSION}/golangci-lint-${GOLANG_CI_VERSION}-linux-amd64.tar.gz golangci-lint.tar.gz
 RUN tar xvzf golangci-lint.tar.gz --strip-components=1 && \
     mv golangci-lint /usr/local/bin/golangci-lint && \
     rm golangci-lint.tar.gz
 
 # https://github.com/gotestyourself/gotestsum/releases
-ARG GOTESTSUM_VERSION=1.12.3
-ARG GOTESTSUM_SHASUM="dd644e817b509fa8e216887ec93facdd85722d1b78f6a19149ee1bc9f59fca64"
-ADD --checksum=sha256:${GOTESTSUM_SHASUM} https://github.com/gotestyourself/gotestsum/releases/download/v${GOTESTSUM_VERSION}/gotestsum_${GOTESTSUM_VERSION}_linux_amd64.tar.gz gotestsum.tar.gz
+ARG GOTESTSUM_VERSION=1.13
+ARG GOTESTSUM_SHASUM="sha256:11ccddeaf708ef228889f9fe2f68291a75b27013ddfc3b18156e094f5f40e8ee"
+ADD --checksum=${GOTESTSUM_SHASUM} https://github.com/gotestyourself/gotestsum/releases/download/v${GOTESTSUM_VERSION}/gotestsum_${GOTESTSUM_VERSION}_linux_amd64.tar.gz gotestsum.tar.gz
 RUN tar xvzf gotestsum.tar.gz && \
     mv gotestsum /usr/local/bin/gotestsum && \
     rm gotestsum.tar.gz
@@ -33,9 +33,9 @@ RUN tar xvzf gotestsum.tar.gz && \
 # https://github.com/daveshanley/vacuum/releases
 # Needs to also be updated in api/Taskfile.yml once the CI gets updated
 # to the new image.
-ARG VACUUM_VERSION=0.17.8
-ARG VACUUM_SHASUM="96415f3bd5d9380846a5ee8821538e45ee45addbcf0ec734c24d3b9a4daf5ed1"
-ADD --checksum=sha256:${VACUUM_SHASUM} https://github.com/daveshanley/vacuum/releases/download/v${VACUUM_VERSION}/vacuum_${VACUUM_VERSION}_linux_x86_64.tar.gz vacuum.tar.gz
+ARG VACUUM_VERSION=0.23.2
+ARG VACUUM_SHASUM="sha256:b9c539f165f4869b55816ce1876998811708f9d28f787ce375b25a6e43c85ef9"
+ADD --checksum=${VACUUM_SHASUM} https://github.com/daveshanley/vacuum/releases/download/v${VACUUM_VERSION}/vacuum_${VACUUM_VERSION}_linux_x86_64.tar.gz vacuum.tar.gz
 RUN tar xvzf vacuum.tar.gz && \
     mv vacuum /usr/local/bin/vacuum && \
     rm vacuum.tar.gz
@@ -47,7 +47,7 @@ RUN tar xvzf vacuum.tar.gz && \
 #
 # Needs to also be updated in api/Taskfile.yml once the CI gets updated
 # to the new image.
-ARG OAPI_CODEGEN_COMMIT_HASH="702cc9178842ef30e8ea8b1ec3aeb9637fa3895f"
+ARG OAPI_CODEGEN_COMMIT_HASH="1401fbe26ce7e128e9963786742490ff444e3795"
 RUN GOBIN=/usr/local/bin go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@${OAPI_CODEGEN_COMMIT_HASH}
 
 # https://github.com/uber-go/mock/releases

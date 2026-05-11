@@ -7,16 +7,16 @@ RUN apk update && apk upgrade && \
     apk add --no-cache tar
 
 # https://github.com/go-task/task/releases
-ARG TASK_VERSION=3.48.0
-ARG TASK_SHASUM="sha256:f4bfc4eef1b2557b262f3cc0a79976a421885cb7b9e71cfe75568a2ebe4d7ae5"
+ARG TASK_VERSION=3.50.0
+ARG TASK_SHASUM="sha256:d449ba85ab85a0769989d78f8b9872938e4ba9347f7f4f925f73d98272a0a655"
 ADD --checksum=${TASK_SHASUM} https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz task_linux_amd64.tar.gz
 RUN tar xvzf task_linux_amd64.tar.gz && \
     mv task /usr/local/bin/task && \
     rm task_linux_amd64.tar.gz
 
 # https://github.com/golangci/golangci-lint/releases
-ARG GOLANG_CI_VERSION=2.9.0
-ARG GOLANG_CI_SHASUM="sha256:493aaaca2eba6c8bcef847d92716bbd91bbac4b22cdbb0ab5b6a581b32946091"
+ARG GOLANG_CI_VERSION=2.12.2
+ARG GOLANG_CI_SHASUM="sha256:8df580d2670fed8fa984aac0507099af8df275e665215f5c7a2ae3943893a553"
 ADD --checksum=${GOLANG_CI_SHASUM} https://github.com/golangci/golangci-lint/releases/download/v${GOLANG_CI_VERSION}/golangci-lint-${GOLANG_CI_VERSION}-linux-amd64.tar.gz golangci-lint.tar.gz
 RUN tar xvzf golangci-lint.tar.gz --strip-components=1 && \
     mv golangci-lint /usr/local/bin/golangci-lint && \
@@ -33,8 +33,8 @@ RUN tar xvzf gotestsum.tar.gz && \
 # https://github.com/daveshanley/vacuum/releases
 # Needs to also be updated in api/Taskfile.yml once the CI gets updated
 # to the new image.
-ARG VACUUM_VERSION=0.23.8
-ARG VACUUM_SHASUM="sha256:05952794613c354601a95ceaebcdd0c12fd785240475bd7f9637e9fe0a3b498a"
+ARG VACUUM_VERSION=0.26.4
+ARG VACUUM_SHASUM="sha256:e1c13c3ef2814a07f83bb22e465a94f202114db38267502e4fdf2b9f4dbeda92"
 ADD --checksum=${VACUUM_SHASUM} https://github.com/daveshanley/vacuum/releases/download/v${VACUUM_VERSION}/vacuum_${VACUUM_VERSION}_linux_x86_64.tar.gz vacuum.tar.gz
 RUN tar xvzf vacuum.tar.gz && \
     mv vacuum /usr/local/bin/vacuum && \
@@ -47,5 +47,5 @@ RUN tar xvzf vacuum.tar.gz && \
 #
 # Needs to also be updated in api/Taskfile.yml once the CI gets updated
 # to the new image.
-ARG OAPI_CODEGEN_COMMIT_HASH="1401fbe26ce7e128e9963786742490ff444e3795"
+ARG OAPI_CODEGEN_COMMIT_HASH="b363ca5db8465d8772855797a8fb56918e8264b3"
 RUN GOBIN=/usr/local/bin go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@${OAPI_CODEGEN_COMMIT_HASH}
